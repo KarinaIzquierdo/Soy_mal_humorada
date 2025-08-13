@@ -3,21 +3,30 @@ package com.practica.adso.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.practica.adso.dto.UsuarioDto;
 import com.practica.adso.models.Usuario;
 import com.practica.adso.repositoryes.UsuarioRepositorio;
+import com.practica.adso.services.UsuarioService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
 public class UsuarioController {
     @Autowired
     private UsuarioRepositorio UsRep;
+    
     
 @GetMapping("/conexion")
 public String usuario_con() {
@@ -50,4 +59,13 @@ public String usuario_con() {
         return"chimbo";
     }
 
-}
+    //llamadop de metodos en capitas
+    @Autowired
+    private UsuarioService UserServis;
+
+    @GetMapping("usuarioservice/{id}")
+    public ResponseEntity<UsuarioDto> usuarioser (@PathVariable Integer id){
+        return new ResponseEntity<>(UserServis.getUsuario(id), HttpStatus.OK);
+    }
+    }
+    

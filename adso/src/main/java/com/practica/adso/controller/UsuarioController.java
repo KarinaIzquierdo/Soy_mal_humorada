@@ -76,6 +76,10 @@ public String usuario_con() {
         return new ResponseEntity<>(UserServis.getUserDto(),HttpStatus.OK);
     }
     
+    @DeleteMapping ("/Eliminamelo/{id}") 
+    public ResponseEntity<UsuarioDto> deleteUser (@PathVariable Integer id) {
+        return new ResponseEntity<>(UserServis.deleteUser(id),HttpStatus.OK);
+    }
     }
     
 

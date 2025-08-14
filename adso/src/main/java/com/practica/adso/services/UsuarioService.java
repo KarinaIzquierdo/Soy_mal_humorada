@@ -12,4 +12,5 @@ public interface UsuarioService {
 
     public List<UsuarioDto> getUserDto();
 
+    public UsuarioDto deleteUser (Integer usarioid);
 }

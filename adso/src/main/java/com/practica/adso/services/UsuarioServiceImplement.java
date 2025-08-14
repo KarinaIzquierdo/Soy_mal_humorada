@@ -36,4 +36,11 @@ public class UsuarioServiceImplement implements UsuarioService {
         List<Usuario> usuario = UsRep.findAll();
         return UsMap.toUsuarioDtoList(usuario);
 }
+
+@Override
+public UsuarioDto deleteUser (Integer usuarioid) {
+    Usuario usuario = UsRep.findById(usuarioid).get();
+    UsRep.delete(usuario);
+    return UsMap.toUsuarioDto(usuario);
+}
 }

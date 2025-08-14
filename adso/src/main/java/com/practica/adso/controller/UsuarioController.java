@@ -65,7 +65,17 @@ public String usuario_con() {
 
     @GetMapping("usuarioservice/{id}")
     public ResponseEntity<UsuarioDto> usuarioser (@PathVariable Integer id){
-        return new ResponseEntity<>(UserServis.getUsuario(id), HttpStatus.OK);
+        return new ResponseEntity<>(UserServis.getUsuario(id),HttpStatus.OK);
     }
+    @PostMapping("/NewUser")
+    public ResponseEntity<UsuarioDto> saveUsuario(@RequestBody UsuarioDto usuarioDto) {
+        return new ResponseEntity<>(UserServis.saveUsuario(usuarioDto),HttpStatus.CREATED);
+    }
+    @GetMapping("/UserListDto")
+    public ResponseEntity <List<UsuarioDto>> getUserDto() {
+        return new ResponseEntity<>(UserServis.getUserDto(),HttpStatus.OK);
     }
     
+    }
+    
+

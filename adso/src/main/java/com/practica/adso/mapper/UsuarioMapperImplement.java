@@ -1,5 +1,8 @@
 package com.practica.adso.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.practica.adso.dto.UsuarioDto;
@@ -13,11 +16,12 @@ public class UsuarioMapperImplement implements UsuarioMapper{
             return null;
         }
         Usuario usuario = new Usuario();
-        usuario.setId_usuario(usuarioDto.getId_usuario());
-        usuario.setNombre(usuarioDto.getNombre());
-        usuario.setApellido(usuario.getApellido());
-        usuario.setCiudad(usuario.getCiudad());
+        usuario.setId_usuario(usuarioDto.getId());
+        usuario.setNombre(usuarioDto.getNom());
+        usuario.setApellido(usuarioDto.getApe());
+        usuario.setCiudad(usuarioDto.getCiu());
         return usuario;
+
     }
     
     @Override
@@ -27,10 +31,24 @@ public class UsuarioMapperImplement implements UsuarioMapper{
         }
 
         UsuarioDto usuarioDto = new UsuarioDto();
-        usuarioDto.setId_usuario(usuario.getId_usuario());
-        usuarioDto.setNombre(usuario.getNombre()); 
-        usuarioDto.setApellido(usuario.getApellido());
-        usuarioDto.setCiudad(usuario.getCiudad());
+        usuarioDto.setId(usuario.getId_usuario());
+        usuarioDto.setNom(usuario.getNombre()); 
+        usuarioDto.setApe(usuario.getApellido());
+        usuarioDto.setCiu(usuario.getCiudad());
         return usuarioDto;
+    }
+
+    @Override
+    public List<UsuarioDto> toUsuarioDtoList(List<Usuario> usuarios) {
+        if (usuarios == null) {
+            return List.of();
+        }
+        
+        List<UsuarioDto> list = new ArrayList<UsuarioDto> (usuarios.size());
+        for (Usuario usuario : usuarios) {
+            list.add(toUsuarioDto(usuario));
+        }
+        return list;
+
     }
 }

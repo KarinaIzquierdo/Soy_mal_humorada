@@ -37,10 +37,16 @@ public class UsuarioServiceImplement implements UsuarioService {
         return UsMap.toUsuarioDtoList(usuario);
 }
 
-@Override
+    @Override
 public UsuarioDto deleteUser (Integer usuarioid) {
     Usuario usuario = UsRep.findById(usuarioid).get();
     UsRep.delete(usuario);
     return UsMap.toUsuarioDto(usuario);
 }
+    @Override
+    public UsuarioDto updateUser (Integer usuarioid, UsuarioDto usuarioDto) {
+        Usuario usuario = UsRep.findById(usuarioid) .get();
+        UsMap.updateUser(usuario, usuarioDto);
+        return UsMap.toUsuarioDto(UsRep.save(usuario));
+    }
 }

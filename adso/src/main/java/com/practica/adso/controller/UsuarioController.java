@@ -28,8 +28,8 @@ public class UsuarioController {
     private UsuarioRepositorio UsRep;
     
     
-@GetMapping("/conexion")
-public String usuario_con() {
+    @GetMapping("/conexion")
+    public String usuario_con() {
     return UsRep.findAll().toString();
     }
 
@@ -59,7 +59,7 @@ public String usuario_con() {
         return"chimbo";
     }
 
-    //llamadop de metodos en capitas
+    //llamado de metodos en capitas
     @Autowired
     private UsuarioService UserServis;
 
@@ -80,6 +80,9 @@ public String usuario_con() {
     public ResponseEntity<UsuarioDto> deleteUser (@PathVariable Integer id) {
         return new ResponseEntity<>(UserServis.deleteUser(id),HttpStatus.OK);
     }
-    }
-    
 
+    @PutMapping ("/UpdateUserDto/{usuarioid}")
+    public ResponseEntity<UsuarioDto> updateUser (@PathVariable Integer usuarioid, @RequestBody UsuarioDto usuarioDto) {
+        return new ResponseEntity<>(UserServis.updateUser(usuarioid, usuarioDto), HttpStatus.OK);
+    }
+}

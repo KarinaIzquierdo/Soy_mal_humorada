@@ -3,11 +3,15 @@ package com.practica.adso.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.practica.adso.dto.ProductoDto;
 import com.practica.adso.models.Producto;
 import com.practica.adso.models.Usuario;
 import com.practica.adso.repositoryes.ProductoRepositorio;
+import com.practica.adso.services.ProductoService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,5 +67,31 @@ public String productoupdate(@PathVariable String id, @RequestBody Producto prod
 public List<Producto> catef(@PathVariable String categoria) {
 return ProRep.findByCategoria(categoria);
 }
+
+//llamado de metodos en capitas
+@Autowired
+private ProductoService ProductServis;
+
+@GetMapping("/GetProductDtoId/{id}")
+public ResponseEntity<ProductoDto> getProductId (@PathVariable Integer id) {
+    return new ResponseEntity<>(ProductServis.getProDtoId(id),HttpStatus.OK);
 }
+
+@PostMapping("PostProductDto")
+public ResponseEntity<ProductoDto> postProductDto(@RequestBody ProductoDto productoDto) {
+    return new ResponseEntity<>(ProductServis.saveProductDto(productoDto), HttpStatus.CREATED);
+}
+
+@GetMapping("GetProductDtoList")
+public ResponseEntity<List<ProductoDto>> getProductList() {
+    return new ResponseEntity<>(ProductServis.getProDtoList(), HttpStatus.OK);
+}
+}
+
+
+
+
+
+
+
 
